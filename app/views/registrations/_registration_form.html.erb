@@ -1,0 +1,11 @@
+<%= form_for @user, url: sign_up_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, placeholder: 'First Last' %><br>
+  <%= f.label :email %>
+  <%= f.text_field :email, placeholder: 'user@selus.com' %><br>
+  <%= f.label :password %>
+  <%= f.password_field :password, placeholder: 'Abc123@#!' %><br>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, placeholder: 'Abc123@#!'  %><br>
+  <%= f.submit 'Sign up', class: 'btn btn-default' %>
+<% end %>

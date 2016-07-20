@@ -1,0 +1,57 @@
+<h1><%= @user.name %>'s dashboard</h1>
+
+<%= link_to 'Create new post', new_post_path, class: 'btn btn-primary' %><br><br>
+
+<div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Posts by You</h4></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tr>
+            <th>Post Title</th>
+            <th>Original Post Date</th>
+            <th>Last Edit Date</th>
+            <th>Edit Post</th>
+            <th>Delete Post</th>
+          </tr>
+          <% @user.posts.each do |post| %>
+            <tr>
+              <td><%= link_to post.title, post_path(post) %></td>
+              <td><%= post.created_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
+              <td><%= post.updated_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
+              <td><%= link_to 'Edit', edit_post_path(post) %></td>
+              <td><%= link_to 'Delete', post_path(post), method: :delete, class: 'post-delete' %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+</div>
+
+<% if @user.admin? %>
+  <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h4>Posts by Others</h4></div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            <tr>
+              <th>Post Title</th>
+              <th>Original Post Date</th>
+              <th>Last Edit Date</th>
+              <th>Edit Post</th>
+              <th>Delete Post</th>
+            </tr>
+            <% Post.all.each do |post| %>
+              <tr>
+                <td><%= link_to post.title, post_path(post) %></td>
+                <td><%= post.created_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
+                <td><%= post.updated_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
+                <td><%= link_to 'Edit', edit_post_path(post) %></td>
+                <td><%= link_to 'Delete', post_path(post), method: :delete, class: 'post-delete' %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+  </div>
+<% end %>

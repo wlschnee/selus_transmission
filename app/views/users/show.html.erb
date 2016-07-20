@@ -1,0 +1,14 @@
+<h1><%= @user.name %></h1>
+
+<% unless @user.posts == [] %>
+Most recent post: <%= link_to @user.posts.last.title, post_path(@user.posts.last) %>
+
+<ul class="list list-unstyled">
+  <% @user.posts.each do |post| %>
+    <li><h3><%= link_to post.title, post_path(post) %></h3></li>
+    <p><%= post.content %></p>
+  <% end %>
+<% else %>
+  No posts by this user here!
+<% end %>
+</ul>

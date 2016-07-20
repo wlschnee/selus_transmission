@@ -1,0 +1,5 @@
+<ul class="list-unstyled">
+  <% @users.each do |user| %>
+    <li><%= link_to user.name, user_path(user) %> <span class="badge"><%= user.posts.count %></span></li>
+  <% end %>
+</ul>

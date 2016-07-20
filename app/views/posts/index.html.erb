@@ -1,0 +1,12 @@
+<div class="col-md-8">
+  <ul class="list list-unstyled">
+    <% @posts.each do |post| %>
+      <li><h2><%= link_to post.title, post_path(post.id) %></h2></li>
+      <strong>Posted by <%= link_to post.user.name, user_path(post.user) %> on <%= post.created_at.strftime('%Y/%m/%d') %></strong><br><br>
+      <%= post.content %>
+    <% end %>
+  </ul>
+</div>
+<div class="col-md-4">
+<%= render partial: 'layouts/sidebar' %>
+</div>
