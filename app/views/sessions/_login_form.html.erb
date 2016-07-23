@@ -1,7 +1,11 @@
 <%= form_for @user, url: login_path do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <%= f.submit 'Sign in', class: 'btn btn-default' %>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %><br>
+  </div>
+  <%= f.submit 'Sign in', class: 'btn btn-primary btn-block' %>
 <% end %>

@@ -1,15 +1,10 @@
 <div class="col-md-8">
+  <h2><%= @category.name %></h2>
   <ul class="list list-unstyled">
-    <% @posts.each do |post| %>
+    <% @category.posts.each do |post| %>
       <%= render partial: 'posts/post_container', locals: {post: post} %>
     <% end %>
   </ul>
-  <div class="digg_pagination">
-      <div class="page_info">
-        <%= page_entries_info @posts %>
-      </div>
-      <%= will_paginate @posts, :container => false %>
-  </div>
 </div>
 <div class="col-md-4">
   <%= render partial: 'layouts/sidebar' %>
