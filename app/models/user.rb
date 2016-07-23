@@ -9,4 +9,9 @@ class User < ApplicationRecord
     user = User.find_by(email: email)
     !!user && user.authenticate(password)
   end
+
+  def toggle_admin
+    self.admin = !self.admin
+    self.save
+  end
 end

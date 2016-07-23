@@ -10,9 +10,11 @@
 
   <body>
     <%= render partial: 'home/navbar' %>
-    <div class="container">
-      <%= flash_messages %>
+    <div class="container" style="margin-bottom: 60px;">
+      <%= render "layouts/messages" %>
+      <%# flash_messages %>
       <%= yield %>
     </div>
+    <%= render partial: 'home/footer' %>
   </body>
 </html>

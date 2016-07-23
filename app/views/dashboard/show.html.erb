@@ -1,4 +1,8 @@
-<h1><%= @user.name %>'s dashboard</h1>
+<h1><%= @user.name %>'s dashboard
+  <% if @user.admin? == true %>
+    <span class="label label-success">Admin</span>
+  <% end %>
+</h1>
 
 <%= link_to 'Create new post', new_post_path, class: 'btn btn-primary' %><br><br>
 
@@ -14,7 +18,7 @@
             <th>Edit Post</th>
             <th>Delete Post</th>
           </tr>
-          <% @user.posts.each do |post| %>
+          <% @user_posts.order('created_at desc').each do |post| %>
             <tr>
               <td><%= link_to post.title, post_path(post) %></td>
               <td><%= post.created_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
@@ -29,6 +33,7 @@
 </div>
 
 <% if @user.admin? %>
+<h1>Admin Controls</h1>
   <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading"><h4>Posts by Others</h4></div>
@@ -36,14 +41,16 @@
           <table class="table table-hover">
             <tr>
               <th>Post Title</th>
+              <th>Post Author</th>
               <th>Original Post Date</th>
               <th>Last Edit Date</th>
               <th>Edit Post</th>
               <th>Delete Post</th>
             </tr>
-            <% Post.all.each do |post| %>
+            <% Post.all.order('created_at desc').each do |post| %>
               <tr>
                 <td><%= link_to post.title, post_path(post) %></td>
+                <td><%= link_to post.user.name, user_path(post.user) %></td>
                 <td><%= post.created_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
                 <td><%= post.updated_at.strftime('%Y/%m/%d - %l:%M %P') %></td>
                 <td><%= link_to 'Edit', edit_post_path(post) %></td>
@@ -53,5 +60,34 @@
           </table>
         </div>
       </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>Users</h4></div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tr>
+            <th>User name</th>
+            <th>User email</th>
+            <th>User admin?</th>
+            <th>Give/Revoke Admin permission</th>
+          </tr>
+          <% User.all.each do |user| %>
+          <% unless user == current_user %>
+            <tr>
+              <th><%= user.name %></th>
+              <th><%= user.email %></th>
+              <th><%= user.admin? %></th>
+              <% if user.admin == true %>
+                <th><%= button_to 'Revoke Admin', user_path(user), method: :put, params: {admin: false}, class: 'btn btn-danger btn-sm' %></th>
+              <% else %>
+                <th><%= button_to 'Make Admin', user_path(user), method: :put, params: {admin: true}, class: 'btn btn-success btn-sm' %></th>
+              <% end %>
+            </tr>
+            <% end %>
+          <% end %>
+        </table>
+      </div>
+    </div>
   </div>
 <% end %>

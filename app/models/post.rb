@@ -1,6 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :comments
-  has_many :post_categories
-  has_many :categories, through: :post_categories
+  belongs_to :category
+  validates :title, :content, presence: true
+
+  def excerpt
+    self.content.slice(0..400) + '...'
+  end
+
 end

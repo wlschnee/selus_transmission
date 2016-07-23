@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.0]
       t.string :title
       t.text :content
       t.index ["title"], name: "index_posts_on_title", unique: true, using: :btree
+      t.belongs_to :category
 
 
       t.timestamps

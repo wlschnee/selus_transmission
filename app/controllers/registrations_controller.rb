@@ -9,10 +9,11 @@ class RegistrationsController < ApplicationController
     user = User.create(user_params)
     if user.save
       session[:user_id] = user.id
-      redirect_to dashboard_path, notice: "Successful registration and login"
+      flash[:success] = "Successful registration and login."
+      redirect_to dashboard_path
     else
-      flash[:error] = "This email is already registered"
-      redirect_to registrations_path
+      flash[:danger] = "Registration error. Maybe you already have an account?"
+      redirect_to sign_up_path
     end
   end
 

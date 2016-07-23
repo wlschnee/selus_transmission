@@ -1,0 +1,13 @@
+<div class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container">
+  <ul class="nav navbar-nav">
+    <li>Content and Site ©<%= Time.now.strftime('%Y') %> Selus Music. All Rights Reserved.</li>
+  </ul>
+  <% if !logged_in? %>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to 'Log-in', login_path %></li>
+    </ul>
+  <% end %>
+
+  </div>
+</div>

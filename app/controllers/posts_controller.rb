@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :select_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticated_only, only: [:new, :create, :edit, :update, :destroy]
   def index
-    @posts = Post.all.order('created_at desc').limit(10)
+    @posts = Post.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -19,8 +19,8 @@ class PostsController < ApplicationController
       flash[:success] = "Post successfully saved"
       redirect_to posts_path(@post)
     else
-      flash[:error] = "Post not saved"
-      redirect_to :back
+      flash[:danger] = "Posts need titles and content."
+      redirect_back(fallback_location: new)
     end
   end
 
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :category_id, :bootsy_image_gallery_id)
   end
 
 

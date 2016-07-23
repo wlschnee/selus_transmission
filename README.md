@@ -8,8 +8,4 @@ Currently there are no dependencies beyond Rails 5 and bcrypt.
 
 Users are able to create accounts and create posts. Admins are a class of user able to edit and delete posts by any user.
 
-#### Planend improvements
-* Integrate a WYSIWYG text editor for rich text editing and image uploading
-* Include Action Mailer routine to allow Admins to authorize new users
-* CSS and appearance improvements
-* Post sort and categorization improvements
+Application uses Bootsy for a rich text editing experience.
